@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+  
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+  
+    --card: 222 47% 11%;
+    --card-foreground: 0 0% 100%;
+  
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+  
+    --ring: 221 83% 53%;
+  
+    --radius: 0.5rem;
+  }
+  
+  body {
+    @apply bg-black text-white;
+  }
+  
+  .card {
+    @apply bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-300;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-900/30 text-blue-400 border border-blue-800/50 hover:bg-blue-900/50;
+  }
+  
+  .loader {
+    @apply rounded-full border-blue-500 border-t-transparent animate-spin;
+  }
+  
+  /* Custom animations */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Ensure dropdowns appear above other content */
+  .dropdown-menu {
+    @apply absolute z-50;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+  
