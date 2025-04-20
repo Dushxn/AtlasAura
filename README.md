@@ -110,10 +110,7 @@ This will output optimized static files to the `dist/` folder.
 - [x] Favorites list
 - [x] Interactive map section
 - [x] Smooth scroll navigation tabs
-- [ ] Google Auth integration 🔐
-- [ ] Offline storage with IndexedDB 💾
-- [ ] Enhanced mobile animations 📱
-
+      
 ---
 
 ## 🌐 Live Site
@@ -125,7 +122,7 @@ This will output optimized static files to the `dist/` folder.
 
 ## 🧑‍💻 Author
 
-Built with 💙 by **[Your Name]**  
+Built with 💙 by **Tharindu Mahindarathna**  
 Feel free to reach out for collaborations or feedback.
 
 ---
