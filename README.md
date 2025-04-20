@@ -14,7 +14,6 @@ Explore the world like never before!
 - 🗺️ **Dynamic Country Pages** — Overview, geography, culture, travel tips, and more
 - ❤️ **Favorites System** — Logged-in users can add or remove countries they love
 - 📍 **Interactive Maps** — Zoomable, animated maps with real-time country location
-- 🌗 **Dark Mode** — Fully dark-themed, modern UI powered by Tailwind CSS
 - 🔐 **Authentication** — Register/login system powered by localStorage
 - 🚀 **Smooth Animations** — Framer Motion-powered transitions & effects
 
