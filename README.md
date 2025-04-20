@@ -97,9 +97,9 @@ This will output optimized static files to the `dist/` folder.
 ## 📸 Screenshots
 
 <p align="center">
-  ![Screenshot 2025-04-20 174736](https://github.com/user-attachments/assets/60f66f0b-720c-4d00-97ff-12e6e30afb0e)
-  ![Screenshot 2025-04-20 174819](https://github.com/user-attachments/assets/8797826c-4fa6-4e9d-840e-fe358c6a07c2)
-  ![Screenshot 2025-04-20 174827](https://github.com/user-attachments/assets/ee89337f-39b1-4bc1-bd51-d88006cc1845)
+  <img src="https://github.com/user-attachments/assets/60f66f0b-720c-4d00-97ff-12e6e30afb0e" alt="AtlasAura Home" width="700" />
+  <img src="https://github.com/user-attachments/assets/8797826c-4fa6-4e9d-840e-fe358c6a07c2" alt="Country Detail Page" width="700" />
+  <img src="https://github.com/user-attachments/assets/ee89337f-39b1-4bc1-bd51-d88006cc1845" alt="Country Detail Page" width="700" />
 </p>
 
 ---
