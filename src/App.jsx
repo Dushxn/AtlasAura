@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Suspense, lazy } from "react"
 import { AuthProvider } from "./auth/AuthContext"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Navbar from "./components/Navbar"
 import LoadingSpinner from "./components/LoadingSpinner"
 import ProtectedRoute from "./pages/ProtectedRoute"
