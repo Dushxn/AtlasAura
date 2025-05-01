@@ -35,38 +35,43 @@ export default function Home() {
     fetchCountries()
   }, [])
 
-  const applyLanguageFilter = (list, selectedLang) => {
-    return list.filter((country) =>
-      country.languages && Object.keys(country.languages).includes(selectedLang)
-    )
-  }
+  const applyLanguageFilter = useCallback((list, selectedLang) => {
+    if (!selectedLang) return list
+
+    return list.filter((country) => {
+      if (!country.languages) return false
+      return Object.keys(country.languages).includes(selectedLang)
+    })
+  }, [])
 
   const handleSearch = useCallback(
     async (term) => {
       setSearchTerm(term)
-      if (!term) {
-        let result = countries
-        if (region) {
-          const response = await getCountriesByRegion(region)
-          result = response.data
-        }
-        if (language) {
-          result = applyLanguageFilter(result, language)
-        }
-        setFilteredCountries(result)
-        return
-      }
+      setIsLoading(true)
 
       try {
-        setIsLoading(true)
-        const response = await getCountryByName(term)
-        let result = response.data
-        if (region) {
-          result = result.filter((country) => country.region === region)
+        let result = []
+
+        if (!term) {
+          if (region) {
+            const response = await getCountriesByRegion(region)
+            result = response.data
+          } else {
+            result = [...countries]
+          }
+        } else {
+          const response = await getCountryByName(term)
+          result = response.data
+
+          if (region) {
+            result = result.filter((country) => country.region === region)
+          }
         }
+
         if (language) {
           result = applyLanguageFilter(result, language)
         }
+
         setFilteredCountries(result)
       } catch (err) {
         console.error("Error searching countries:", err)
@@ -75,31 +80,32 @@ export default function Home() {
         setIsLoading(false)
       }
     },
-    [countries, region, language]
+    [countries, region, language, applyLanguageFilter],
   )
 
   const handleRegionChange = useCallback(
     async (selectedRegion) => {
       setRegion(selectedRegion)
-      if (!selectedRegion) {
-        if (searchTerm) {
-          handleSearch(searchTerm)
-        } else {
-          let result = countries
-          if (language) result = applyLanguageFilter(result, language)
-          setFilteredCountries(result)
-        }
-        return
-      }
+      setIsLoading(true)
 
       try {
-        setIsLoading(true)
-        const response = await getCountriesByRegion(selectedRegion)
-        let result = response.data
+        let result = []
+
+        if (selectedRegion) {
+          const response = await getCountriesByRegion(selectedRegion)
+          result = response.data
+        } else {
+          result = [...countries]
+        }
+
         if (searchTerm) {
           result = result.filter((country) => country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
         }
-        if (language) result = applyLanguageFilter(result, language)
+
+        if (language) {
+          result = applyLanguageFilter(result, language)
+        }
+
         setFilteredCountries(result)
       } catch (err) {
         console.error("Error filtering by region:", err)
@@ -108,34 +114,30 @@ export default function Home() {
         setIsLoading(false)
       }
     },
-    [countries, searchTerm, language, handleSearch]
+    [countries, searchTerm, language, applyLanguageFilter],
   )
 
   const handleLanguageChange = useCallback(
     (selectedLanguage) => {
       setLanguage(selectedLanguage)
-      if (!selectedLanguage) {
-        let result = countries
-        if (searchTerm) {
-          result = result.filter((country) => country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
-        }
+      setIsLoading(true)
+
+      try {
+        let result = [...countries]
+
         if (region) {
           result = result.filter((country) => country.region === region)
         }
-        setFilteredCountries(result)
-        return
-      }
 
-      try {
-        setIsLoading(true)
-        let filtered = applyLanguageFilter(countries, selectedLanguage)
         if (searchTerm) {
-          filtered = filtered.filter((country) => country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
+          result = result.filter((country) => country.name.common.toLowerCase().includes(searchTerm.toLowerCase()))
         }
-        if (region) {
-          filtered = filtered.filter((country) => country.region === region)
+
+        if (selectedLanguage) {
+          result = applyLanguageFilter(result, selectedLanguage)
         }
-        setFilteredCountries(filtered)
+
+        setFilteredCountries(result)
       } catch (err) {
         console.error("Error filtering by language:", err)
         setFilteredCountries([])
@@ -143,7 +145,7 @@ export default function Home() {
         setIsLoading(false)
       }
     },
-    [countries, searchTerm, region]
+    [countries, searchTerm, region, applyLanguageFilter],
   )
 
   if (error) {

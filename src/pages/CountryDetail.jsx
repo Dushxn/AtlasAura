@@ -37,6 +37,7 @@ import {
   Hotel,
   AlertTriangle,
 } from "lucide-react"
+import CountryImages from "../components/CountryImages"
 
 export default function CountryDetail() {
   const { code } = useParams()
@@ -54,6 +55,7 @@ export default function CountryDetail() {
   const geographyRef = useRef(null)
   const cultureRef = useRef(null)
   const travelRef = useRef(null)
+  const imagesRef = useRef(null) // Add imagesRef
 
   const isDetailsInView = useInView(detailsRef, { triggerOnce: true, threshold: 0.2 })
   const isMapInView = useInView(mapRef, { triggerOnce: true, threshold: 0.2 })
@@ -61,6 +63,7 @@ export default function CountryDetail() {
   const isGeographyInView = useInView(geographyRef, { triggerOnce: true, threshold: 0.2 })
   const isCultureInView = useInView(cultureRef, { triggerOnce: true, threshold: 0.2 })
   const isTravelInView = useInView(travelRef, { triggerOnce: true, threshold: 0.2 })
+  const isImagesInView = useInView(imagesRef, { triggerOnce: true, threshold: 0.2 }) // Add isImagesInView
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -733,6 +736,26 @@ export default function CountryDetail() {
               </div>
             </motion.div>
           </div>
+        </motion.div>
+
+        {/* Country Images Section */}
+        <motion.div
+          ref={imagesRef}
+          initial="visible"
+          animate={isImagesInView ? "visible" : "visible"}
+          variants={staggerContainer}
+          className="mb-16"
+        >
+          <motion.div variants={fadeInUp} className="mb-8">
+            <div className="inline-block px-4 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-4">
+              Photo Gallery
+            </div>
+            <h2 className="text-3xl font-bold text-white">Explore {countryName} in Pictures</h2>
+          </motion.div>
+
+          <motion.div variants={fadeInUp}>
+            <CountryImages countryName={countryName} />
+          </motion.div>
         </motion.div>
 
         {/* Bordering Countries */}

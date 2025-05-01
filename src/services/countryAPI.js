@@ -18,23 +18,26 @@ api.interceptors.response.use(
 )
 
 // Get all countries with essential fields only
-export const getAllCountries = () => api.get("/all?fields=name,capital,region,subregion,population,flags,cca3,latlng")
+export const getAllCountries = () =>
+  api.get("/all?fields=name,capital,region,subregion,population,flags,cca3,latlng,languages")
 
 // Search country by name
-export const getCountryByName = (name) => api.get(`/name/${name}`)
+export const getCountryByName = (name) =>
+  api.get(`/name/${name}?fields=name,capital,region,subregion,population,flags,cca3,latlng,languages`)
 
 // Get countries by region
-export const getCountriesByRegion = (region) => api.get(`/region/${region}`)
+export const getCountriesByRegion = (region) =>
+  api.get(`/region/${region}?fields=name,capital,region,subregion,population,flags,cca3,latlng,languages`)
 
 // Get country by code
 export const getCountryByCode = (code) => api.get(`/alpha/${code}`)
 
 // Get countries by language (this is a client-side filter since the API doesn't support it directly)
-export const getCountriesByLanguage = async (language) => {
+export const getCountriesByLanguage = async (languageCode) => {
   const response = await getAllCountries()
   const filtered = response.data.filter((country) => {
     if (!country.languages) return false
-    return Object.values(country.languages).some((lang) => lang.toLowerCase().includes(language.toLowerCase()))
+    return Object.keys(country.languages).includes(languageCode)
   })
   return { data: filtered }
 }

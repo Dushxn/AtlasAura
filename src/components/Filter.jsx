@@ -126,12 +126,12 @@ export default function Filter({ onRegionChange, onLanguageChange }) {
                 ))}
               </ul>
             </div>,
-            portalContainer
+            portalContainer,
           )}
       </div>
 
       {/* Language Filter */}
-      {/* <div className="relative">
+      <div className="relative">
         <button
           ref={languageButtonRef}
           onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -168,9 +168,9 @@ export default function Filter({ onRegionChange, onLanguageChange }) {
                 ))}
               </ul>
             </div>,
-            portalContainer
+            portalContainer,
           )}
-      </div> */}
+      </div>
 
       {/* Clear Filters Button */}
       {(selectedRegion || selectedLanguage) && (
